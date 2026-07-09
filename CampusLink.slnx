@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CampusLink.Application/CampusLink.Application.csproj" />
+    <Project Path="src/CampusLink.Domain/CampusLink.Domain.csproj" />
+    <Project Path="src/CampusLink.Infrastructure/CampusLink.Infrastructure.csproj" />
+    <Project Path="src/CampusLink.Presentation.Api/CampusLink.Presentation.Api.csproj" />
+  </Folder>
+</Solution>
