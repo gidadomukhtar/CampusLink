@@ -1,34 +1,50 @@
+using CampusLink.Application.DependencyInjection;
+using CampusLink.Infrastructure.DependencyInjection;
+using CampusLink.Presentation.Api.Extensions;
+using CampusLink.Presentation.Api.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Logging.ClearProviders();
+builder.Logging.AddJsonConsole();
+
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
+builder.Services.AddPresentation();
+
+var allowedOrigins = builder.Configuration
+    .GetSection("Security:Cors:AllowedOrigins")
+    .Get<string[]>() ?? Array.Empty<string>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultCors", policy =>
+    {
+        if (allowedOrigins.Length > 0)
+        {
+            policy.WithOrigins(allowedOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            return;
+        }
+
+        policy.WithOrigins("https://localhost");
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
+app.UseCors("DefaultCors");
+app.UseMiddleware<SecurityHeadersMiddleware>();
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+app.UseAuthorization();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

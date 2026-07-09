@@ -1,198 +1,119 @@
-📖 Overview
+# CampusLink
 
-CampusLink is an open-source student platform designed to improve campus life while giving students the opportunity to gain practical software engineering experience by contributing to a real-world project.
+CampusLink is an open-source student platform focused on real campus workflows and real-world software engineering practice.
 
-Many students have brilliant ideas but limited opportunities to work on production-ready software, collaborate with peers, or contribute to open source. CampusLink bridges this gap by combining essential campus services with a collaborative development environment where students learn by building.
+## Major changes explained
+This refactor introduces a production-ready baseline while keeping behavior minimal and stable:
 
-Although the project started at the **Federal University Dutsin-Ma (FUDMA)**, the long-term vision is to create a platform that can serve universities across Nigeria and eventually Africa.
+1. **Layered architecture bootstrap**
+   - Added a clean solution layout under `src/` with explicit layers:
+     - `CampusLink.Domain`
+     - `CampusLink.Application`
+     - `CampusLink.Infrastructure`
+     - `CampusLink.Presentation.Api`
+   - This creates clear extension points for future modules like marketplace, lost & found, profiles, and notifications.
 
----
+2. **Minimal working vertical slice (Lost & Found)**
+   - Added a working API flow for creating and reading lost-item reports.
+   - Includes domain model, application use-case service, in-memory infrastructure repository, and API controller.
 
-# 🎯 Why CampusLink?
+3. **Dependency Injection composition roots**
+   - Added layer-specific extension methods:
+     - `AddApplication()`
+     - `AddInfrastructure()`
+     - `AddPresentation()`
+   - Uses explicit lifetimes and constructor injection.
 
-Traditional academic environments often provide theoretical knowledge but very few opportunities for students to gain real-world software engineering experience.
+4. **Validation, error handling, and API contracts**
+   - Request model validation with data annotations.
+   - Guard clauses at application/domain boundaries.
+   - Global exception middleware with consistent `ApiErrorResponse` contract.
 
-CampusLink was created to change that.
+5. **Security and operational defaults**
+   - Added baseline security headers middleware.
+   - Added CORS policy with secure default behavior.
+   - Added safer configuration structure in `appsettings*` (no hardcoded secrets).
+   - Added structured JSON console logging.
 
-It serves as a **classroom without walls**, where every issue, pull request, discussion, and code review becomes a learning opportunity.
+6. **Naming/documentation consistency**
+   - Replaced placeholder classes with feature-aligned names and namespaces.
+   - Added XML documentation comments on public APIs.
 
-Instead of building projects that end after a semester, students contribute to software that solves real campus problems while developing industry-standard skills.
+7. **Repository hygiene for open source**
+   - Added `.gitignore` for build artifacts.
+   - Added `CONTRIBUTING.md` with conventions and contributor workflow.
 
----
+## Architecture
 
-# ❤️ Our Mission
-
-We believe **where a student studies should never determine how far they can go in technology.**
-
-CampusLink exists to help students:
-
-- 💻 Learn modern software engineering practices
-- 🚀 Gain practical industry experience
-- 📂 Build strong portfolios and resumes
-- 🤝 Collaborate with other developers
-- 🌍 Discover internships and global opportunities
-- 🛠 Build software that solves real campus challenges
-
----
-
-# ✨ Features
-
-## 🛒 Student Marketplace
-Buy and sell items safely within your trusted campus community.
-
-## 🔍 Lost & Found
-Report, search, and recover lost items quickly.
-
-## 👨‍🎓 Student Profiles
-Showcase technical skills, portfolios, and connect with peers.
-
-## 🤝 Communities
-Join communities based on interests, technologies, or academic departments.
-
-## 📅 Campus Events
-Stay informed about workshops, seminars, hackathons, and campus activities.
-
-## 🚀 Opportunities Hub
-Discover internships, scholarships, hackathons, competitions, and student developer programs.
-
-## 💼 Project Collaboration
-Find teammates and collaborate on meaningful projects.
-
-## 🤖 AI Features
-Leverage AI-powered tools to improve learning and productivity.
-
-## 🔔 Notifications
-Receive updates about campus announcements and platform activities.
-
-## 🌍 Multi-Campus Support
-A scalable architecture designed to support multiple universities from a single platform.
-
----
-
-# 🛠 Tech Stack
-
-| Layer | Technology |
-|--------|------------|
-| Frontend | Blazor WebAssembly |
-| Backend | ASP.NET Core |
-| Database | SQL Server |
-| Authentication | ASP.NET Identity |
-| Hosting | Microsoft Azure |
-| Version Control | Git & GitHub |
-
----
-
-# 🚀 Getting Started
-
-## Prerequisites
-
-Before getting started, make sure you have the latest **.NET SDK** installed.
-
-## Installation
-
-Clone the repository.
-
-```bash
-git clone https://github.com/gidadomukhtar/CampusLink.git
+```text
+src/
+  CampusLink.Domain/
+    Common/
+    Exceptions/
+    LostAndFound/
+  CampusLink.Application/
+    Abstractions/
+    DependencyInjection/
+    DTOs/
+    Exceptions/
+    Services/
+  CampusLink.Infrastructure/
+    DependencyInjection/
+    Repositories/
+    Services/
+  CampusLink.Presentation.Api/
+    Contracts/
+    Controllers/
+    Extensions/
+    Middleware/
 ```
 
-Navigate into the project directory.
+Dependency direction:
 
-```bash
-cd CampusLink
-```
+`Presentation -> Application <- Infrastructure -> Domain`
 
-Restore project dependencies.
+`Application -> Domain`
 
+## Tech stack
+- .NET 10
+- ASP.NET Core Web API
+- In-memory persistence (bootstrap implementation)
+
+## Getting started
+
+### Prerequisites
+- .NET SDK 10+
+
+### Build
 ```bash
 dotnet restore
+dotnet build CampusLink.slnx
 ```
 
-Run the application.
-
+### Run API
 ```bash
-dotnet run
+dotnet run --project src/CampusLink.Presentation.Api/CampusLink.Presentation.Api.csproj
 ```
 
----
+### Example endpoint
+- `POST /api/v1/lost-found/reports`
+- `GET /api/v1/lost-found/reports/{reportId}`
 
-# 🤝 Contributing
+## Migration notes
+- The repository moved from documentation-only to a layered .NET solution scaffold.
+- Existing contributor docs are preserved and expanded with architecture and conventions.
+- No external runtime secrets were introduced; configuration remains environment-driven.
 
-Contributions are welcome from developers of **all experience levels**.
+## Verification checklist
+- [x] Solution scaffolded with Domain/Application/Infrastructure/Presentation layers
+- [x] Build artifact tracking removed and `.gitignore` added
+- [x] Minimal API slice implemented with DI, validation, and logging
+- [x] Global exception handling and API error contract added
+- [x] Security headers and CORS policy added
+- [x] README and CONTRIBUTING docs updated
 
-Whether you're:
+## Contributing
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-- fixing bugs
-- improving documentation
-- designing user interfaces
-- implementing new features
-- reviewing code
-- suggesting ideas
-
-your contribution matters.
-
-If you're new to GitHub or open source, CampusLink is intentionally designed to be **beginner-friendly**. Feel free to explore the open issues or submit your first pull request.
-
----
-
-# 🗺 Roadmap
-
-- [x] Project Planning
-- [x] Repository Setup
-- [x] Initial UI Design
-- [ ] Authentication
-- [ ] Student Profiles
-- [ ] Marketplace
-- [ ] Lost & Found
-- [ ] Notifications
-- [ ] AI Assistant
-- [ ] Event Management
-- [ ] Communities
-- [ ] Mobile App
-- [ ] Multi-Campus Support
-
----
-
-# 👥 Community
-
-## 🚧 Project Status
-
-**Actively Under Development**
-
-We're currently building the Minimum Viable Product (MVP) and welcome feedback, feature suggestions, architectural advice, and contributions.
-
-## About the Maintainers
-
-CampusLink is proudly built by **Gid Paragon**, a student-led technology community committed to helping aspiring developers learn, collaborate, contribute to open source, and gain practical software engineering experience.
-
-### Connect With Us
-
-📸 Instagram  
-https://instagram.com/gid_paragon
-
-💻 GitHub  
-https://github.com/gidadomukhtar/gid-paragon-hub
-
-💬 WhatsApp Community  
-https://whatsapp.com/channel/0029VbBdZjZ9RZAQO0bYfm2g
-
----
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
----
-
-# ⭐ Support the Project
-
-If you believe in empowering students through open source and practical software engineering, consider giving this repository a ⭐ Star.
-
-Every star helps more students discover the project and encourages more people to contribute.
-
-
-### Built with ❤️ by Gid Paragon
-
-**Connecting Students. Building Communities. Creating Opportunities.**
-
-</div>
+## License
+MIT
