@@ -55,9 +55,8 @@ public sealed class LostItemReportService : ILostItemReportService
         await _notificationPublisher.PublishLostItemReportCreatedAsync(report.Id, cancellationToken);
 
         _logger.LogInformation(
-            "Created lost item report {ReportId} for campus {Campus}",
-            report.Id,
-            report.Campus);
+            "Created lost item report {ReportId}",
+            report.Id);
 
         return Map(report);
     }
