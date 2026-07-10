@@ -1,0 +1,102 @@
+@page "/tech-directory/create-profile"
+@rendermode InteractiveServer
+@using CampusLink.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [Authorize]
+@inject CampusLink.Data.ApplicationDbContext DbContext
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Create Profile - CampusLink</PageTitle>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>Create Your Tech Profile</h1>
+            <p>Tell the campus about yourself and find collaborators!</p>
+
+            <EditForm Model="newProfile" OnValidSubmit="HandleSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="mb-3">
+                    <label>Full Name</label>
+                    <InputText class="form-control" @bind-Value="newProfile.FullName" />
+                </div>
+
+                <div class="mb-3">
+                    <label>University/Campus</label>
+                    <InputText class="form-control" @bind-Value="newProfile.University" 
+                               placeholder="e.g. Federal University Dutsinma" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Department</label>
+                    <InputText class="form-control" @bind-Value="newProfile.Department" 
+                               placeholder="e.g. Computer Science, Engineering" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Bio (Short about you)</label>
+                    <InputTextArea class="form-control" @bind-Value="newProfile.Bio" 
+                                   placeholder="Tell us a bit about yourself..." rows="3" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Skills (comma-separated)</label>
+                    <InputText class="form-control" @bind-Value="newProfile.Skills" 
+                               placeholder="e.g. C#, JavaScript, React, Flutter, AWS" />
+                    <small class="text-muted">Separate each skill with a comma</small>
+                </div>
+
+                <div class="mb-3">
+                    <label>Interests (comma-separated)</label>
+                    <InputText class="form-control" @bind-Value="newProfile.Interests" 
+                               placeholder="e.g. Web Development, AI, Open Source, Cybersecurity" />
+                    <small class="text-muted">What are you interested in learning or doing?</small>
+                </div>
+
+                <div class="mb-3">
+                    <label>GitHub Link (optional)</label>
+                    <InputText class="form-control" @bind-Value="newProfile.GitHubLink" 
+                               placeholder="https://github.com/yourname" />
+                </div>
+
+                <div class="mb-3">
+                    <label>LinkedIn Link (optional)</label>
+                    <InputText class="form-control" @bind-Value="newProfile.LinkedInLink" 
+                               placeholder="https://linkedin.com/in/yourname" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Contact Phone (optional)</label>
+                    <InputText class="form-control" @bind-Value="newProfile.ContactPhone" 
+                               placeholder="e.g. 08012345678" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg">Create Profile</button>
+                <a href="/tech-directory" class="btn btn-outline-secondary btn-lg ms-2">Cancel</a>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private StudentProfile newProfile = new();
+
+    private async Task HandleSubmit()
+    {
+        var authState = await AuthProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        newProfile.UserId = user.FindFirst(c => c.Type.Contains("nameidentifier"))?.Value ?? "";
+        newProfile.DateCreated = DateTime.UtcNow;
+        newProfile.DateUpdated = DateTime.UtcNow;
+
+        DbContext.StudentProfiles.Add(newProfile);
+        await DbContext.SaveChangesAsync();
+
+        Navigation.NavigateTo("/tech-directory");
+    }
+}

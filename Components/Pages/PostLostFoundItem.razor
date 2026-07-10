@@ -1,0 +1,72 @@
+@page "/lost-and-found/post"
+@rendermode InteractiveServer
+@using CampusLink.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [Authorize]
+@inject CampusLink.Data.ApplicationDbContext DbContext
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Post an Item - CampusLink</PageTitle>
+
+<h1>Post a Lost or Found Item</h1>
+
+<EditForm Model="newItem" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Status</label>
+        <InputSelect class="form-select" @bind-Value="newItem.Status">
+            <option value="@ItemStatus.Lost">Lost</option>
+            <option value="@ItemStatus.Found">Found</option>
+        </InputSelect>
+    </div>
+
+    <div class="mb-3">
+        <label>Title</label>
+        <InputText class="form-control" @bind-Value="newItem.Title" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <InputTextArea class="form-control" @bind-Value="newItem.Description" />
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        <InputText class="form-control" @bind-Value="newItem.Category" placeholder="e.g. Electronics, ID Card, Bag" />
+    </div>
+
+    <div class="mb-3">
+        <label>Location</label>
+        <InputText class="form-control" @bind-Value="newItem.Location" placeholder="e.g. Library, Faculty of Computing" />
+    </div>
+
+    <div class="mb-3">
+        <label>Contact Info</label>
+        <InputText class="form-control" @bind-Value="newItem.ContactInfo" placeholder="Phone or email" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Post Item</button>
+</EditForm>
+
+@code {
+    private LostFoundItem newItem = new();
+
+    private async Task HandleSubmit()
+    {
+        var authState = await AuthProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        newItem.PostedByUserId = user.FindFirst(c => c.Type.Contains("nameidentifier"))?.Value ?? "";
+        newItem.PostedByName = user.Identity?.Name ?? "Unknown";
+        newItem.DatePosted = DateTime.UtcNow;
+
+        DbContext.LostFoundItems.Add(newItem);
+        await DbContext.SaveChangesAsync();
+
+        Navigation.NavigateTo("/lost-and-found");
+    }
+}

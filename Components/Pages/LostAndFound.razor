@@ -1,0 +1,80 @@
+@page "/lost-and-found"
+@rendermode InteractiveServer
+@using CampusLink.Models
+@using Microsoft.EntityFrameworkCore
+@inject CampusLink.Data.ApplicationDbContext DbContext
+@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthProvider
+
+<PageTitle>Lost & Found - CampusLink</PageTitle>
+
+<h1>🔍 Lost & Found</h1>
+<p>Browse items reported lost or found on campus, or post one yourself.</p>
+
+<a href="/lost-and-found/post" class="btn btn-primary mb-3">+ Post an Item</a>
+
+<div class="mb-3">
+    <input class="form-control" placeholder="Search by title or category..."
+           @bind="searchTerm" @bind:event="oninput" />
+</div>
+
+@if (items == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!FilteredItems.Any())
+{
+    <p>No items found.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in FilteredItems)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <span class="badge @(item.Status == ItemStatus.Lost ? "bg-danger" : item.Status == ItemStatus.Found ? "bg-success" : "bg-secondary")">
+                            @item.Status
+                        </span>
+                        <p class="card-text mt-2">@item.Description</p>
+                        <p class="text-muted mb-1"><small>Category: @item.Category</small></p>
+                        <p class="text-muted mb-1"><small>Location: @item.Location</small></p>
+                        <p class="text-muted"><small>Posted by @item.PostedByName on @item.DatePosted.ToShortDateString()</small></p>
+                        @if (item.Status != ItemStatus.Resolved)
+                        {
+                            <button class="btn btn-sm btn-outline-secondary" @onclick="() => MarkResolved(item.Id)">
+                                Mark as Resolved
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<LostFoundItem>? items;
+    private string searchTerm = "";
+
+    private IEnumerable<LostFoundItem> FilteredItems =>
+        items!.Where(i =>
+            string.IsNullOrWhiteSpace(searchTerm) ||
+            i.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            (i.Category?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false))
+        .OrderByDescending(i => i.DatePosted);
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await DbContext.LostFoundItems.ToListAsync();
+    }
+
+    private async Task MarkResolved(int id)
+    {
+        var item = items!.First(i => i.Id == id);
+        item.Status = ItemStatus.Resolved;
+        DbContext.LostFoundItems.Update(item);
+        await DbContext.SaveChangesAsync();
+    }
+}

@@ -1,0 +1,127 @@
+@page "/tech-directory"
+@rendermode InteractiveServer
+@using CampusLink.Models
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.Authorization
+@inject CampusLink.Data.ApplicationDbContext DbContext
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Tech Student Directory - CampusLink</PageTitle>
+
+<h1>🧑‍💻 Tech Student Directory</h1>
+<p>Find and connect with tech-minded students on campus by skills and interests.</p>
+
+<a href="/tech-directory/create-profile" class="btn btn-primary mb-3">+ Create Your Profile</a>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input class="form-control" placeholder="Search by name, skill, or interest..."
+               @bind="searchTerm" @bind:event="oninput" />
+    </div>
+    <div class="col-md-4">
+        <select class="form-select" @bind="selectedUniversity" @bind:event="onchange">
+            <option value="">All Universities</option>
+            @foreach (var uni in UniqueUniversities)
+            {
+                <option value="@uni">@uni</option>
+            }
+        </select>
+    </div>
+</div>
+
+@if (profiles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!FilteredProfiles.Any())
+{
+    <p>No students found. Be the first to create a profile!</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var profile in FilteredProfiles)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@profile.FullName</h5>
+                        <p class="text-muted small mb-1">📍 @profile.University</p>
+                        <p class="text-muted mb-2">@profile.Department</p>
+                        
+                        @if (!string.IsNullOrWhiteSpace(profile.Bio))
+                        {
+                            <p class="card-text">@profile.Bio</p>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(profile.Skills))
+                        {
+                            <div class="mb-2">
+                                <strong>Skills:</strong>
+                                <div>
+                                    @foreach (var skill in profile.Skills.Split(',').Select(s => s.Trim()))
+                                    {
+                                        <span class="badge bg-info me-1 mb-1">@skill</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(profile.Interests))
+                        {
+                            <div class="mb-2">
+                                <strong>Interests:</strong>
+                                <div>
+                                    @foreach (var interest in profile.Interests.Split(',').Select(i => i.Trim()))
+                                    {
+                                        <span class="badge bg-success me-1 mb-1">@interest</span>
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        <div class="mt-3">
+                            @if (!string.IsNullOrWhiteSpace(profile.GitHubLink))
+                            {
+                                <a href="@profile.GitHubLink" target="_blank" class="btn btn-sm btn-dark me-2">GitHub</a>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(profile.LinkedInLink))
+                            {
+                                <a href="@profile.LinkedInLink" target="_blank" class="btn btn-sm btn-info">LinkedIn</a>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(profile.ContactPhone))
+                            {
+                                <p class="text-muted small mt-2">📱 @profile.ContactPhone</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<StudentProfile>? profiles;
+    private string searchTerm = "";
+    private string selectedUniversity = "";
+
+    private IEnumerable<string> UniqueUniversities =>
+        profiles?.Select(p => p.University).Distinct().OrderBy(u => u).ToList() ?? new List<string>();
+
+    private IEnumerable<StudentProfile> FilteredProfiles =>
+        profiles!.Where(p =>
+            (string.IsNullOrWhiteSpace(selectedUniversity) || p.University == selectedUniversity) &&
+            (string.IsNullOrWhiteSpace(searchTerm) ||
+            p.FullName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            p.Department.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            (p.Skills?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+            (p.Interests?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)))
+        .OrderByDescending(p => p.DateCreated);
+
+    protected override async Task OnInitializedAsync()
+    {
+        profiles = await DbContext.StudentProfiles.ToListAsync();
+    }
+}

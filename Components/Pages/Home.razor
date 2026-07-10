@@ -1,0 +1,99 @@
+@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [StreamRendering]
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthProvider
+
+<PageTitle>CampusLink - Connect. Share. Thrive.</PageTitle>
+
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 20px; text-align: center;">
+    <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 20px;">🔗 CampusLink</h1>
+    <p style="font-size: 1.3rem; margin-bottom: 10px;">Connect with tech students at your campus</p>
+    <p style="font-size: 1rem; opacity: 0.9;">Discover collaborators, share resources, and grow together</p>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-lg" style="border: none; border-radius: 15px; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center;">
+                    <h2 style="font-size: 2.5rem;">🧑‍💻</h2>
+                    <h3>Tech Student Directory</h3>
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <p class="card-text">Find and connect with tech-minded students at your campus. Browse by skills, interests, and university.</p>
+                    <a href="/tech-directory" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 20px;">
+                        Explore Directory
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-lg" style="border: none; border-radius: 15px; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 30px; text-align: center;">
+                    <h2 style="font-size: 2.5rem;">🔍</h2>
+                    <h3>Lost & Found</h3>
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <p class="card-text">Post items you've lost or found on campus. Help the community stay connected and recover lost belongings.</p>
+                    <a href="/lost-and-found" class="btn btn-danger btn-lg" style="width: 100%; margin-top: 20px;">
+                        Browse Items
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12" style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 15px;">
+            <h3>What's Coming Soon</h3>
+            <p class="text-muted">Campus Marketplace • Campus Hubs • Global Community • Private Communities • Messaging</p>
+        </div>
+    </div>
+</div>
+
+<div style="background: #f8f9fa; padding: 60px 20px; margin-top: 50px; text-align: center;">
+    <h2>Get Started Today</h2>
+    <p class="text-muted mb-4">Join your campus tech community and make meaningful connections</p>
+    <AuthorizeView>
+        <Authorized>
+            <p>Welcome back! Start exploring above.</p>
+        </Authorized>
+        <NotAuthorized>
+            <a href="/Account/Register" class="btn btn-primary btn-lg me-3">Sign Up</a>
+            <a href="/Account/Login" class="btn btn-outline-primary btn-lg">Log In</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+<style>
+    .btn-primary {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-primary:hover {
+        background-color: #5568d3;
+        border-color: #5568d3;
+    }
+
+    .btn-danger {
+        background-color: #f5576c;
+        border-color: #f5576c;
+    }
+
+    .btn-danger:hover {
+        background-color: #e63d57;
+        border-color: #e63d57;
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+    }
+</style>
