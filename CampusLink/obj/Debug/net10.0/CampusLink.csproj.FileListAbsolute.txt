@@ -82,4 +82,5 @@ C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\CampusLink.pdb
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\CampusLink.genruntimeconfig.cache
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\ref\CampusLink.dll
-C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\compressed\hlba31ynup-{0}-9tdfv26ft6-9tdfv26ft6.gz
+C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\CampusLink.sourcelink.json
+C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\CampusLink\obj\Debug\net10.0\compressed\hlba31ynup-{0}-gsskngu5qx-gsskngu5qx.gz

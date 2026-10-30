@@ -249,6 +249,8 @@ h1:focus {
     }
 }
 
+/* This is where I started adding my own styles after the default styling */
+
 .cl-navbar {
     display: flex;
     align-items: center;
@@ -379,7 +381,7 @@ h1:focus {
 
 .cl-hero-actions h2 {
     color: #102b4e;
-    font-size: clamp(1.7rem, 3vw, 2,5);
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
 }
 
 .cl-next-section > p:last-child {
@@ -435,5 +437,218 @@ h1:focus {
 
     .cl-hero-actions a {
         text-align: center;
+    }
+}
+
+/* This is the styles I'm adding after creating the events section */
+.cl-content-section {
+    padding: 64px 5%;
+    scroll-margin-top: 24px;
+}
+
+.cl-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.cl-section-heading h2 {
+    margin: 10px 0;
+    color: #102b4e;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.cl-section-heading > div > p:last-child {
+    max-width: 680px;
+    color: #52677f;
+    line-height: 1.7;
+}
+
+.cl-text-link,
+.cl-card-footer a:hover {
+    color: #c18c18;
+}
+
+.cl-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.cl-event-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e1e8f0;
+    border-radius: 14px;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cl-event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(16, 43, 78 /10%);
+}
+
+.cl-event-banner {
+    min-height: 145px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.cl-banner-blue {
+    background: linear-gradient(135deg, #dceaff, #a9cafa);
+}
+
+.cl-banner-gold {
+    background: linear-gradient(135deg, #fff0c9, #f4d58a);
+}
+
+.cl-banner-red {
+    background: linear-gradient(135deg, #d9f3e4, #a7dfc0);
+}
+
+.cl-tag {
+    display: inline-block;
+    padding: 7px 11px;
+    border-radius: 30px;
+    background: rgb(255 255 255 / 85%);
+    color: #183653;
+    font-size: 700;
+}
+
+.cl-event-icon {
+    color: #173b62;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.cl-card-body {
+    padding: 22px;
+}
+
+.cl-card-meta {
+    color: #5276a0;
+    font-size: 0.73rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.cl-card-body h3 {
+    margin: 10px 0;
+    color: #102b4e;
+    font-size: 1.2rem;
+}
+
+.cl-card-body > p:not(.cl-card-meta) {
+    min-height: 76px;
+    color: #5b6d82;
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.cl-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 18px;
+    margin-top: 16px;
+    border-top: 1px solid #e7edf5;
+    font-size: 0.83rem;
+}
+.cl-card-footer span {
+    color: #607187;
+}
+
+@media (max-width: 900px) {
+    .cl-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .cl-content-section {
+        padding: 44px 5%;
+    }
+
+    .cl-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cl-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cl-card-body > p:not(.cl-card-meta) {
+        min-height: 0;
+    }
+}
+
+.cl-simple-card {
+    padding: 24px;
+}
+
+.cl-simple-card h3,
+.cl-simple-panel h3,
+.cl-opportunity-strip h3 {
+    color: #102b4e;
+}
+
+.cl-simple-card > p,
+.cl-project-panel > p,
+.cl-opportunity-strip > p {
+    color: #52677f;
+    line-height: 1.75;
+}
+
+.cl-simple-card > a {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.cl-project-section {
+    background: #f3f7fc;
+}
+
+.cl-project-panel {
+    padding: 36px;
+    border: 1px solid #dbe6f2;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.cl-project-panel h3 {
+    font-size: 1.6rem;
+}
+
+.cl-project-panel .cl-button-primary {
+    margin-top: 12px;
+}
+
+.cl-opportunity-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.cl-opportunity-strip > div {
+    padding: 24px;
+    border-left: 3px solid #d9a52e;
+    background: #f5f8fc;
+    border-radius: 0 10px 10px 0;
+}
+
+@media (max-width: 700px) {
+    .cl-opportunity-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .cl-project-panel {
+        padding: 24px;
     }
 }
