@@ -819,3 +819,115 @@ h1:focus {
         flex-direction: column;
     }
 }
+
+/* This is where I started addidng styles the events page */
+
+.cl-events-page {
+    padding: 80px 8%;
+    background: #f8fafc;
+    min-height: 70vh;
+}
+
+.cl-events-heading {
+    max-width: 700px;
+    margin-bottom: 45px;
+}
+
+.cl-events-heading h1 {
+    font-size: 40px;
+    color: #102a43;
+    margin: 12px 0; 
+}
+
+.cl-events-heading > p:last-child {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.cl-events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.cl-event-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cl-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(16, 42, 67, 0.08);
+    border-color: #d6b45a;
+}
+
+.cl-event-banner {
+    height: 150px;
+    background: #102a43;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cl-event-banner span {
+    color: #d6b45a;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.cl-event-details {
+    padding: 24px;
+}
+
+.cl-event-date {
+    color: #b38b2e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cl-event-details h2 {
+    color: #102a43;
+    font-size: 20px;
+    margin: 12px 0;
+}
+
+.cl-event-details > p:not(.cl-event-date) {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;   
+}
+
+.cl-event-location {
+    margin-top: 18px;
+}
+
+.cl-event-details a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #b38b2e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .cl-events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .cl-events-page {
+        padding: 55px 6%;
+    }
+
+    .cl-events-heading h1 {
+        font-size: 30px;
+    }
+
+    .cl-events-grid {
+        grid-template-columns: 1fr;
+    }
+}
