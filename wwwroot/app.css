@@ -955,3 +955,120 @@ h1:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* This is where I started coding campuslink contact page*/
+
+.cl-contact-page {
+    padding: 75px 8%;
+    background: #f8fafc;
+    min-height: 80vh;
+}
+
+.cl-contact-heading {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.cl-contact-heading h1 {
+    color: #102b4e;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 15px 0;
+}
+
+.cl-contact-heading > p:last-child {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.cl-contact-container {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 45px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.cl-contact-info {
+    padding: 30px 0;
+}
+
+.cl-contact-info h2,
+.cl-contact-form h2 {
+    color: #122d51;
+    margin-bottom: 18px;
+}
+
+.cl-contact-info > p,
+.cl-contact-info-item p {
+    color: #5c6b80;
+    line-height: 1.7;
+}
+
+.cl-contact-info-item {
+    margin-top: 30px;
+}
+
+.cl-contact-info-item h3 {
+    color: #b99134;
+    font-size: 1rem;
+}
+
+.cl-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 35px;
+    background: #fffffff9;
+    border: 1px solid #e3ebf6;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(16, 43, 78, 0.05);
+}
+
+.cl-contact-form label {
+    color: #374b64;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cl-contact-form-input,
+.cl-contact-form textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d6e1ed;
+    border-radius: 8px;
+    font: inherit;
+    outline: none;
+}
+
+.cl-contact-form input:focus,
+.cl-contact-form textarea:focus {
+    border-color: #2468b4;
+    box-shadow: 0 0 0 03px rgba(36, 104, 180, 0.1);
+}
+
+.cl-contact-form textarea {
+    resize: vertical;
+}
+
+.cl-contact-form button {
+    border: navajowhite;
+    cursor: pointer;
+    margin-top: 112px
+}
+
+@media (max-width: 750px) {
+    .cl-contact-page {
+        padding: 50px 5%;
+    }
+
+    .cl-contact-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .cl-contact-form {
+        padding: 25px 19px;
+    }
+    
+}

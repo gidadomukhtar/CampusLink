@@ -110,7 +110,6 @@ C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\scopedcss\C
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\scopedcss\Components\Layout\ReconnectModal.razor.rz.scp.css
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\scopedcss\bundle\CampusLink.styles.css
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\scopedcss\projectbundle\CampusLink.bundle.scp.css
-C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\compressed\hlba31ynup-{0}-rh1h6m8hiq-rh1h6m8hiq.gz
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\compressed\9u4i799g98-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\compressed\3zs8onf7wr-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\compressed\gg8kcekrmg-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -170,3 +169,4 @@ C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\refint\Camp
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\CampusLink.pdb
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\CampusLink.genruntimeconfig.cache
 C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\ref\CampusLink.dll
+C:\Users\DELL\OneDrive\Desktop\Projects\CampusLink\obj\Debug\net10.0\compressed\hlba31ynup-{0}-av611ml97x-av611ml97x.gz
