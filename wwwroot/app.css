@@ -1054,7 +1054,7 @@ h1:focus {
 .cl-contact-form button {
     border: navajowhite;
     cursor: pointer;
-    margin-top: 112px
+    margin-top: 12px
 }
 
 @media (max-width: 750px) {
@@ -1068,7 +1068,7 @@ h1:focus {
     }
 
     .cl-contact-form {
-        padding: 25px 19px;
+        padding: 25px 20px;
     }
     
 }
