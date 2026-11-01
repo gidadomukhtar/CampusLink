@@ -1072,3 +1072,44 @@ h1:focus {
     }
     
 }
+
+.cl-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 5%;
+    background: #d0bfbf;
+    border-bottom: 1px solid #e7edf5;
+}
+
+.cl-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cl-nav-links a {
+    color: #334760;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.cl-nav-links a:hover,
+.cl-nav-links a.active {
+    color: #c18c18;
+}
+
+@media (max-width: 850px) {
+    .cl-navbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cl-nav-links {
+        gap: 14px;
+    }
+}
