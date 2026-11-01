@@ -1,0 +1,957 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #006bb7;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+h1:focus {
+    outline: none;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid #e50000;
+}
+
+.validation-message {
+    color: #e50000;
+}
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
+    }
+
+.darker-border-checkbox.form-check-input {
+    border-color: #929292;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* My CampusLink homepage styling starts here */
+
+.cl-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 5%;
+    background: #ffffff;
+    border-bottom: 1px solid #e7edf5;
+}
+
+.cl-brand {
+    color: #102b4e;
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cl-brand span {
+    color: #d9a52e;
+}
+
+.cl-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.cl-nav-links a {
+    color: #334760;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.cl-nav-links a:hover {
+    color: #c18c18;
+}
+
+.cl-nav-cta,
+.cl-button-primary {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #12345a;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cl-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 64px 5%;
+    background: #f3f7fc;
+}
+
+.cl-hero-content {
+    max-width: 620px;
+}
+
+.cl-eyebrow {
+    color: #2468b4;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.cl-hero h1 {
+    margin: 20px 0;
+    color: #102b4e;
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    line-height: 1.12;
+}
+
+.cl-hero h1 span {
+    color: #c18c18;
+}
+
+.cl-hero-description {
+    color: #52677f;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.cl-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.cl-button-primary {
+    background: #d9a52e;
+    color: #172c45;
+}
+
+.cl-button-secondary {
+    display: inline-block;
+    padding: 11px 19px;
+    border: 1px solid #cbd6e3;
+    border-radius: 8px;
+    color: #12345a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cl-hero-note {
+    margin-top: 24px;
+    color: #718198;
+    font-size: 0.9rem;
+}
+
+.cl-hero-image img {
+    display: block;
+    width: 100%;
+    min-height: 340px;
+    max-height: 490px;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.cl-next-section {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.cl-next-section h2 {
+    color: #102b4e;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.cl-next-section > p:last-child {
+    max-width: 650px;
+    margin: 16px auto;
+    color: #52677f;
+    line-height: 1.8;
+}
+
+@media (max-width: 850px) {
+    .cl-hero {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+    }
+
+    .cl-nav-links {
+        order: 3;
+        width: 100%;
+    }
+
+    .cl-navbar {
+        flex-wrap: wrap;
+    }
+
+    .cl-hero-image img {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cl-navbar {
+        gap: 16px;
+        padding: 16px 3%;
+    }
+
+    .cl-brand {
+        font-size: 1.4rem;
+    }
+
+    .cl-nav-links {
+        gap: 14px;
+    }
+
+    .cl-nav-links a {
+        font-size: 0.85rem;
+    }
+
+    .cl-nav-cta {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .cl-hero-actions a {
+        text-align: center;
+    }
+}
+
+/* This is where I started adding my own styles after the default styling */
+
+.cl-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 5%;
+    background: #ffffff;
+    border-bottom: 1px solid #e7edf5;
+}
+
+.cl-brand {
+    color: #102b4e;
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cl-brand span {
+    color: #d9a52e;
+}
+
+.cl-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.cl-nav-links a {
+    color: #334760;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.cl-nav-links a:hover {
+    color: #c18c18;
+}
+
+.cl-nav-cta,
+.cl-button-primary {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #12345a;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cl-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 64px 5%;
+    background: #f3f7fc;
+}
+
+.cl-hero-content {
+    max-width: 620px;
+}
+
+.cl-eyebrow {
+    color: #2468b4;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.cl-hero h1 {
+    margin: 20px 0;
+    color: #102b4e;
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    line-height: 1.12;
+}
+
+.cl-hero h1 span {
+    color: #c18c18;
+}
+
+.cl-hero-description {
+    color: #52677f;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.cl-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.cl-button-primary {
+    background: #d9a52e;
+    color: #172c45;    
+}
+
+.cl-button-secondary {
+    display: inline-block;
+    padding: 11px 19px;
+    border: 1px solid #cbd6e3;
+    border-radius: 8px;
+    color: #12345a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cl-hero-note {
+    margin-top: 24px;
+    color: #718198;
+    font-size: 0.9rem;
+}
+
+.cl-hero-image img {
+    display: block;
+    width: 100%;
+    min-height: 340px;
+    max-height: 490px;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.cl-next-section {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.cl-next-section h2 {
+    color: #102b4e;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.cl-next-section > p:last-child {
+    max-width: 650px;
+    margin: 16px auto;
+    color: #52677f;
+    line-height: 1.8;
+}
+
+@media (max-width:850px) {
+    .cl-navbar {
+        flex-wrap: wrap;
+    }
+
+    .cl-nav-links {
+        order: 3;
+        width: 100%;
+    }
+
+    .cl-hero {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+    }
+
+    .cl-hero-image img {
+        min-height: 250px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .cl-navbar {
+        gap: 16px;
+        padding: 16px 5%;
+    }
+
+    .cl-brand {
+        font-size: 1.4rem;
+    }
+
+    .cl-nav-links {
+        gap: 14px;
+    }
+
+    .cl-nav-links a {
+        font-size: 0.85rem;        
+    }
+
+    .cl-nav-cta {
+        padding: 10px 12px;
+        font-size: 0.85rem;  
+    }
+
+    .cl-hero-actions a {
+        text-align: center;
+    }
+}
+
+/* This is the styles I'm adding after creating the events section */
+.cl-content-section {
+    padding: 64px 5%;
+    scroll-margin-top: 24px;
+}
+
+.cl-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.cl-section-heading h2 {
+    margin: 10px 0;
+    color: #102b4e;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.cl-section-heading > div > p:last-child {
+    max-width: 680px;
+    color: #52677f;
+    line-height: 1.7;
+}
+
+.cl-text-link,
+.cl-card-footer a:hover {
+    color: #c18c18;
+}
+
+.cl-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.cl-event-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e1e8f0;
+    border-radius: 14px;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cl-event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(16, 43, 78 0.10);
+}
+
+.cl-event-banner {
+    min-height: 145px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.cl-banner-blue {
+    background: linear-gradient(135deg, #dceaff, #a9cafa);
+}
+
+.cl-banner-gold {
+    background: linear-gradient(135deg, #fff0c9, #f4d58a);
+}
+
+.cl-banner-green {
+    background: linear-gradient(135deg, #d9f3e4, #a7dfc0);
+}
+
+.cl-tag {
+    display: inline-block;
+    padding: 7px 11px;
+    border-radius: 30px;
+    background: rgb(255 255 255 / 85%);
+    color: #183653;
+    font-weight: 700;
+}
+
+.cl-event-icon {
+    color: #173b62;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.cl-card-body {
+    padding: 22px;
+}
+
+.cl-card-meta {
+    color: #5276a0;
+    font-size: 0.73rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.cl-card-body h3 {
+    margin: 10px 0;
+    color: #102b4e;
+    font-size: 1.2rem;
+}
+
+.cl-card-body > p:not(.cl-card-meta) {
+    min-height: 76px;
+    color: #5b6d82;
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.cl-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 18px;
+    margin-top: 16px;
+    border-top: 1px solid #e7edf5;
+    font-size: 0.83rem;
+}
+.cl-card-footer span {
+    color: #607187;
+}
+
+@media (max-width: 900px) {
+    .cl-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .cl-content-section {
+        padding: 44px 5%;
+    }
+
+    .cl-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cl-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cl-card-body > p:not(.cl-card-meta) {
+        min-height: 0;
+    }
+}
+
+.cl-simple-card {
+    padding: 24px;
+}
+
+.cl-simple-card h3,
+.cl-simple-panel h3,
+.cl-opportunity-strip h3 {
+    color: #102b4e;
+}
+
+.cl-simple-card > p,
+.cl-project-panel > p,
+.cl-opportunity-strip > div > p {
+    color: #52677f;
+    line-height: 1.75;
+}
+
+.cl-simple-card > a {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.cl-project-section {
+    background: #f3f7fc;
+}
+
+.cl-project-panel {
+    padding: 36px;
+    border: 1px solid #dbe6f2;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.cl-project-panel h3 {
+    font-size: 1.6rem;
+}
+
+.cl-project-panel .cl-button-primary {
+    margin-top: 12px;
+}
+
+.cl-opportunity-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.cl-opportunity-strip > div {
+    padding: 24px;
+    border-left: 3px solid #d9a52e;
+    background: #f5f8fc;
+    border-radius: 0 10px 10px 0;
+}
+
+@media (max-width: 700px) {
+    .cl-opportunity-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .cl-project-panel {
+        padding: 24px;
+    }
+}
+
+
+.cl-content-section {
+    padding: 80px 8%;
+    background: #f8fafc;
+}
+
+.cl-section-heading {
+    max-width: 750px;
+    margin-bottom: 40px;
+}
+
+.cl-section-heading h2 {
+    color: #102a43;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 12px 0;
+}
+
+.cl-section-heading > div p:last-child {
+    color: #64748b;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.cl-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.cl-service-card {
+    background: #ffffff;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cl-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(16, 42, 67, 0.08);
+    border-color: #d6b45a;
+}
+
+.cl-service-card h3 {
+    color: #102a43;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.cl-service-card p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.cl-text-link {
+    color: #b38b2e;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cl-text-link:hover {
+    color: #102a43;
+}
+
+@media (max-width: 768px) {
+    .cl-content-section {
+        padding: 60px 6%;
+    }
+
+    .cl-section-heading h2 {
+        font-size: 29px;
+    }
+
+    .cl-service-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .cl-content-section {
+        padding: 45px 5%;
+    }
+}
+
+.cl-footer {
+    background: #102a43;
+    color: #ffffff;
+    padding: 65px 8% 25px;
+}
+
+.cl-footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 45px;
+}
+
+.cl-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cl-footer .cl-brand {
+    color: #ffffff;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.cl-footer-brand p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    font-size: 15px;
+    max-width: 320px;
+    margin: 0;
+}
+
+.cl-footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cl-footer-links h3 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: #d6b45a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cl-footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.cl-footer-links a:hover {
+    color: #d6b45a;
+    transform: translateX(3px);
+}
+
+.cl-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #cbd5e1;
+    font-size: 14px;
+    display: flex;
+}
+
+@media (max-width: 950px) {
+    .cl-footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .cl-footer-brand {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 550px) {
+    .cl-footer {
+        padding: 45px 5% 20px;
+    }
+
+    .cl-footer-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .cl-footer-brand {
+        grid-column: span 1;
+    }
+
+    .cl-footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* This is where I started addidng styles the events page */
+
+.cl-events-page {
+    padding: 80px 8%;
+    background: #f8fafc;
+    min-height: 70vh;
+}
+
+.cl-events-heading {
+    max-width: 700px;
+    margin-bottom: 45px;
+}
+
+.cl-events-heading h1 {
+    font-size: 40px;
+    color: #102a43;
+    margin: 12px 0; 
+}
+
+.cl-events-heading > p:last-child {
+    color: #64748b;
+    line-height: 1.8;
+}
+
+.cl-events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.cl-event-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cl-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(16, 43, 78, 0.10);
+    border-color: #d6b45a;
+}
+
+.cl-event-banner {
+    height: 150px;
+    background: #102a43;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cl-event-banner span {
+    color: #d6b45a;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.cl-event-details {
+    padding: 24px;
+}
+
+.cl-event-date {
+    color: #b38b2e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cl-event-details h2 {
+    color: #102a43;
+    font-size: 20px;
+    margin: 12px 0;
+}
+
+.cl-event-details > p:not(.cl-event-date) {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;   
+}
+
+.cl-event-location {
+    margin-top: 18px;
+}
+
+.cl-event-details a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #b38b2e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .cl-events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .cl-events-page {
+        padding: 55px 6%;
+    }
+
+    .cl-events-heading h1 {
+        font-size: 30px;
+    }
+
+    .cl-events-grid {
+        grid-template-columns: 1fr;
+    }
+}
