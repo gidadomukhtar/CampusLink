@@ -601,7 +601,7 @@ h1:focus {
 
 .cl-simple-card > p,
 .cl-project-panel > p,
-.cl-opportunity-strip > p {
+.cl-opportunity-strip > div > p {
     color: #52677f;
     line-height: 1.75;
 }
@@ -749,74 +749,101 @@ h1:focus {
 
 .cl-footer-content {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
     padding-bottom: 45px;
 }
 
-.cl-footer-brand p {
-    color: #cbd5e1;
-    line-height: 1.8;
-    max-width: 300px;
-    margin-top: 18px;
+.cl-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .cl-footer .cl-brand {
     color: #ffffff;
     font-size: 27px;
+    font-weight: 700;
+}
+
+.cl-footer-brand p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    font-size: 15px;
+    max-width: 320px;
+    margin: 0;
 }
 
 .cl-footer-links {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 12px;
 }
 
 .cl-footer-links h3 {
     font-size: 16px;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
     color: #d6b45a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .cl-footer-links a {
     color: #cbd5e1;
     text-decoration: none;
     font-size: 14px;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .cl-footer-links a:hover {
     color: #d6b45a;
+    transform: translateX(3px);
 }
 
 .cl-footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 22px;
     display: flex;
     justify-content: space-between;
     gap: 15px;
     color: #cbd5e1;
     font-size: 14px;
+    display: flex;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
     .cl-footer-content {
-        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .cl-footer-brand {
+        grid-column: span 2;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .cl-footer {
-        padding: 50px 6% 20px;
+        padding: 45px 5% 20px;
     }
 
     .cl-footer-content {
+        display: grid;
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 35px;
+    }
+
+    .cl-footer-brand {
+        grid-column: span 1;
     }
 
     .cl-footer-bottom {
         flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
     }
 }
 
