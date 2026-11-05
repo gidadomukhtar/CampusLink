@@ -4,6 +4,7 @@ using CampusLink.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,7 +67,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.MapPost("/account/register", async (
-    RegisterInputModel input,
+    [FromForm] RegisterInputModel input,
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager) =>
 {
@@ -80,19 +81,17 @@ app.MapPost("/account/register", async (
         validationResults,
         validateAllProperties: true))
     {
-        return Results.BadRequest(
-            validationResults.Select(x => x.ErrorMessage));
-        
+        return Results.Redirect("/register?error=invalid");
     }
 
     var user = new ApplicationUser
     {
-        UserName = input.Email,
-        Email = input.Email,
-        FullName = input.FullName,
-        University = input.University,
-        Faculty = input.Faculty,
-        Department = input.Department,
+        UserName = input.Email.Trim(),
+        Email = input.Email.Trim(),
+        FullName = input.FullName.Trim(),
+        University = input.University.Trim(),
+        Faculty = input.Faculty.Trim(),
+        Department = input.Department.Trim(),
         Level = input.Level
     };
 
@@ -102,8 +101,7 @@ app.MapPost("/account/register", async (
 
     if (!result.Succeeded)
     {
-        return Results.BadRequest(
-            result.Errors.Select(x => x.Description));
+        return Results.Redirect("/register?error=account");
     }
 
     var roleResult = await userManager.AddToRoleAsync(user, "Student");
@@ -112,11 +110,41 @@ app.MapPost("/account/register", async (
     {
         await userManager.DeleteAsync(user);
 
-        return Results.BadRequest(
-            roleResult.Errors.Select(x => x.Description));
+        return Results.Redirect("/register?error=role");
     }
 
     await signInManager.SignInAsync(user, isPersistent: false);
+
+    return Results.Redirect("/");
+})
+.AllowAnonymous();
+
+app.MapPost("/account/login", async (
+    [FromForm] LoginInputModel input,
+    SignInManager<ApplicationUser> signInManager) =>
+{
+    var validationResults = new List<ValidationResult>();
+    var validationContext = new ValidationContext(input);
+
+    if (!Validator.TryValidateObject(
+        input,
+        validationContext,
+        validationResults,
+        validateAllProperties: true))
+    {
+        return Results.Redirect("/login?error=invalid");
+    }
+
+    var result = await signInManager.PasswordSignInAsync(
+        input.Email.Trim(),
+        input.Password,
+        isPersistent: false,
+        lockoutOnFailure: false);
+
+    if (!result.Succeeded)
+    {
+        return Results.Redirect("/login?error=invalid");
+    }
 
     return Results.Redirect("/dashboard");
 })

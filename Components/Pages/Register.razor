@@ -1,7 +1,6 @@
 @page "/register"
 @using CampusLink.Models
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.Extensions.Diagnostics.HealthChecks
+
 
 <PageTitle>Create Account | CampusLink</PageTitle>
 
@@ -18,38 +17,51 @@
 
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
+                    @if (Error == "invalid")
+                    {
+                        <div class="alert alert-warning">
+                            Please check your registration details.
+                        </div>
+                    }
+                    else if (Error == "account")
+                    {
+                        <div class="alert alert-danger">
+                            We couldn't create your account. Your email may already be registered.
+                        </div>
+                    }
+                    else if (Error == "role")
+                    {
+                        <div class="alert alert-danger">
+                            We couldn't complete your registration. Please try again.
+                        </div>
+                    }
 
-                    <EditForm Model="@registration"
-                              OnInvalidSubmit="@HandleRegistration">
-                        
-                        <DataAnnotationsValidator />
-
-                        <ValidationSummary />
+                    <form method="post" action="/account/register">
+                    
+                        <AntiforgeryToken />
 
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
-                            <InputText class="form-control"
-                                       @bind-Value="registration.Email"
-                                       placeholder="you@example.com" />
-                            <ValidationMessage For="@(() => registration.Email)" />
+                            <input name="FullName" class="form-control"
+                                   placeholder="Enter your full name" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input name="Email" type="email" class="form-control"
+                                   placeholder="you@example.com" required />
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <InputText class="form-control"
-                                       @bind-Value="registration.Password"
-                                       type="password"
-                                       placeholder="Create a password" />
-                            <ValidationMessage For="@(() => registration.Password)" />
+                            <input name="Password" type="password" class="form-control"
+                                   minlength="8" required />
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Confirm Password</label>
-                            <InputText type="password"
-                                       class="form-control"
-                                       @bind-Value="registration.ConfirmPassword"
-                                       placeholder="Confirm your password" />
-                            <ValidationMessage For="@(() => registration.ConfirmPassword)" />
+                            <input name="ConfirmPassword" type="password"
+                                   class="form-control" minlength="8" required />
                         </div>
 
                         <hr />
@@ -57,31 +69,39 @@
                         <h5 class="mb-3">Your Campus Information</h5>
 
                         <div class="mb-3">
+                            <label class="form-label">University</label>
+                            <input name="University" class="form-control"
+                                   placeholder="Your university" required />
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Faculty</label>
-                            <InputText class="form-control"
-                                       @bind-Value="registration.Faculty"
-                                       placeholder="Your faculty" />
-                            <ValidationMessage For="@(() => registration.Department)" />
+                            <input name="Faculty" class="form-control"
+                                   placeholder="Your faculty" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <input name="Department" class="form-control"
+                                   placeholder="Your department" required />
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label">Level</label>
-                            <InputSelect class="form-select"
-                                         @bind-Value="registration.Level">
+                            <select name="Level" class="form-select" required>
                                 <option value="">Select your level</option>
                                 <option value="100 Level">100 Level</option>
                                 <option value="200 Level">200 Level</option>
                                 <option value="300 Level">300 Level</option>
                                 <option value="400 Level">400 Level</option>
                                 <option value="500 Level">500 Level</option>
-                            </InputSelect>
-                            <ValidationMessage For="@(() => registration.Level)" />
+                            </select>
                         </div>
 
-                        <button type="submit" class="btn btn primary w-100">
+                        <button type="submit" class="btn btn-primary w-100">
                             Create Account
                         </button>
-                    </EditForm>
+                    </form>
 
                     <div class="text-center mt-4">
                         <span>Already have an account?</span>
@@ -94,10 +114,6 @@
 </div>
 
 @code {
-    private RegisterInputModel registration =new();
-
-    private void HandleRegistration()
-    {
-        // I will connect the registration endpoint when it's ready
-    }
+   [SupplyParameterFromQuery(Name = "error")]
+    public string? Error { get; set; }
 }

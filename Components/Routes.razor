@@ -1,10 +1,15 @@
-﻿@using static Microsoft.AspNetCore.Components.Web.RenderMode
-<Router AppAssembly="typeof(Program).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+﻿@using CampusLink.Components.Layout
+
+<Router AppAssembly="typeof(Program).Assembly"
+        NotFoundPage="typeof(Pages.NotFound)">
+
     <Found Context="routeData">
         <RouteView
             RouteData="routeData"
-            DefaultLayout="typeof(MainLayout)"
-            @rendermode="InteractiveServer" /> 
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+            DefaultLayout="typeof(MainLayout)" />
+
+        <FocusOnNavigate
+            RouteData="routeData"
+            Selector="h1" />
     </Found>
 </Router>
