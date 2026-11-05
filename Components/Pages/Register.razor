@@ -1,0 +1,103 @@
+@page "/register"
+@using CampusLink.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Diagnostics.HealthChecks
+
+<PageTitle>Create Account | CampusLink</PageTitle>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md 7 col-lg-6">
+
+            <div class="text-center mb-4">
+                <h1>Create your CampusLink account</h1>
+                <p class="text-muted">
+                    Connect with your campus community.
+                </p>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <EditForm Model="@registration"
+                              OnInvalidSubmit="@HandleRegistration">
+                        
+                        <DataAnnotationsValidator />
+
+                        <ValidationSummary />
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <InputText class="form-control"
+                                       @bind-Value="registration.Email"
+                                       placeholder="you@example.com" />
+                            <ValidationMessage For="@(() => registration.Email)" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <InputText class="form-control"
+                                       @bind-Value="registration.Password"
+                                       type="password"
+                                       placeholder="Create a password" />
+                            <ValidationMessage For="@(() => registration.Password)" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <InputText type="password"
+                                       class="form-control"
+                                       @bind-Value="registration.ConfirmPassword"
+                                       placeholder="Confirm your password" />
+                            <ValidationMessage For="@(() => registration.ConfirmPassword)" />
+                        </div>
+
+                        <hr />
+
+                        <h5 class="mb-3">Your Campus Information</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label">Faculty</label>
+                            <InputText class="form-control"
+                                       @bind-Value="registration.Faculty"
+                                       placeholder="Your faculty" />
+                            <ValidationMessage For="@(() => registration.Department)" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Level</label>
+                            <InputSelect class="form-select"
+                                         @bind-Value="registration.Level">
+                                <option value="">Select your level</option>
+                                <option value="100 Level">100 Level</option>
+                                <option value="200 Level">200 Level</option>
+                                <option value="300 Level">300 Level</option>
+                                <option value="400 Level">400 Level</option>
+                                <option value="500 Level">500 Level</option>
+                            </InputSelect>
+                            <ValidationMessage For="@(() => registration.Level)" />
+                        </div>
+
+                        <button type="submit" class="btn btn primary w-100">
+                            Create Account
+                        </button>
+                    </EditForm>
+
+                    <div class="text-center mt-4">
+                        <span>Already have an account?</span>
+                        <a href="/login">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterInputModel registration =new();
+
+    private void HandleRegistration()
+    {
+        // I will connect the registration endpoint when it's ready
+    }
+}
